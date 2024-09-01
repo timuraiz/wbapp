@@ -1,7 +1,13 @@
-package weekly_report_app
+package main
 
-import "wbapp/internal/weekly-report-app"
+import (
+	"log"
+	"wbapp/internal/weekly-report-app"
+)
 
 func main() {
-	weekly_report_app.Run()
+	err := weekly_report_app.Run()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }

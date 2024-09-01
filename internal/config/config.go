@@ -2,7 +2,8 @@ package config
 
 import (
 	"gopkg.in/yaml.v2"
-	"os"
+	"io"
+	"time"
 )
 
 type Config struct {
@@ -10,20 +11,24 @@ type Config struct {
 }
 
 type WeeklyReportConfig struct {
-	Host string `yaml:"host"`
+	Host    string   `yaml:"host"`
+	Methods []Method `yaml:"methods"`
 }
 
 type Method struct {
+	Method  string        `yaml:"method"`
+	Route   string        `yaml:"route"`
+	Timeout time.Duration `yaml:"timeout"`
 }
 
-func ParseConfig(path string) (*Config, error) {
-	fileData, err := os.ReadFile(path)
+func ParseConfig(buffer io.Reader) (*Config, error) {
+	bytes, err := io.ReadAll(buffer)
 	if err != nil {
 		return nil, err
 	}
 
 	var data Config
-	err = yaml.Unmarshal(fileData, &data)
+	err = yaml.Unmarshal(bytes, &data)
 	if err != nil {
 		return nil, err
 	}

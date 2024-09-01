@@ -1,12 +1,12 @@
 weekly-report-config:
   host: "https://documents-api.wildberries.ru"
   methods:
-    - categories:
-        - route: "/api/v1/documents/categories"
-        - timeout: 10s
-    - list_documents:
-        - route: "/api/v1/documents/list"
-        - timeout: 10s
-    - download_document:
-        - route: "/api/v1/documents/download"
-        - timeout: 10s
+    - method: "categories"
+      route: "/api/v1/documents/categories"
+      timeout: 10s
+    - method: "list"
+      route: "/api/v1/documents/list"
+      timeout: 10s
+    - method: "download"
+      route: "/api/v1/documents/download"
+      timeout: 10s
